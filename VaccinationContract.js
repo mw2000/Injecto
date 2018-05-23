@@ -17,9 +17,6 @@ VaccinationContract.prototype = {
         //Get Data
         var user = Blockchain.transaction.from;
         return this.userVaccinesMap.get(user);
-    },
-    getMap: function() {
-      return this.userVaccinesMap;
     }
 };
 
