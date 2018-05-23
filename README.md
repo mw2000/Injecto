@@ -5,4 +5,8 @@ It is built for the Nebulas Blockchain.
 
 NebPay.js is used for the communication between the blockchain and the browser.
 
-To run, enter this directory with a terminal or command prompt and enter node server. This will run it on the port 1000.
+To run, enter this directory with a terminal or command prompt and enter:
+```
+node server.
+```
+This will run it on the port 1000.
