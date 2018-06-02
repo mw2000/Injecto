@@ -7,7 +7,6 @@ Built on the Nebulas Blockchain, this is a simple dapp which helps to keep recor
 - Multi-step-modal.js for a modal to edit your vaccination record
 - JQuery for selection
 - JSPdf.js for downloading vaccination record in pdf format
--
 
 ### What's New in v0.2:
 - New Name
