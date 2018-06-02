@@ -9,7 +9,9 @@ String.prototype.replaceAt=function(index, replacement) {
   return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
 }
 
-var contract_address = "n1zMrGx3Gy4f8qkKSfy3bMnkdcC96skk9fz";
+// var contract_address = "n1zMrGx3Gy4f8qkKSfy3bMnkdcC96skk9fz";
+// var contract_address = "n1qWh9YjSGMtmHzF8fBWdfAMAHKNsBG8HR8";
+var contract_address = "n1hb58JDbWBZuXFUCcmGCtWHf3AvLAPhZBg"; //TestNet v0.2
 
 $('.list-group-item').dblclick(function(){
   $(this).removeClass('disabled');
@@ -36,6 +38,15 @@ $(document).ready(function(){
   });
 });
 
+$('#demo-modal-3').on('shown.bs.modal', function (e) {
+  $('#blurEnabler').addClass('transparentBox');
+});
+
+$('#demo-modal-3').on('hidden.bs.modal', function (e) {
+  $('#blurEnabler').removeClass('transparentBox');
+});
+
+
 function onDocumentLoad(resp) {
   if(typeof(resp)==='string' && resp.startsWith("Error")) {
         throw new Error(resp)
@@ -58,12 +69,34 @@ function onDocumentLoad(resp) {
       }
     }
   }
-
 }
+
+$('#launchButton').click(function(){
+  nebPay.simulateCall(contract_address, 0, "getVaccines", null, {
+    listener: onDocumentLoad
+  });
+});
 
 //to check if the extension is installed
 //if the extension is installed, var "webExtensionWallet" will be injected in to web page
 if(typeof(webExtensionWallet) === "undefined"){
-    alert ("Extension wallet is not installed, redirecting you to more information.");
-    window.location =  location.protocol + '//' + location.host + location.pathname + 'about.html';
+    $('#alertModal').modal('show');
+    $('#blurEnabler').addClass('transparentBox');
+    $("#launchButton").addClass('disabled');
+    $('#launchButton').attr('data-toggle', "")
+    $('#launchButton').attr('data-target', "")
 }
+
+$('#alertModal').on('hidden.bs.modal', function (e) {
+  $('#blurEnabler').removeClass('transparentBox');
+});
+
+
+$('#address').keypress(function (e) {
+ var key = e.which;
+ if(key == 13)  // the enter key code
+  {
+    window.location = location.protocol + '//' + location.host + location.pathname + 'view_record.html?' + $(this).val();
+  }
+});
+// window.location = location.protocol + '//' + location.host + location.pathname + 'results.html?' + resp.txhash;

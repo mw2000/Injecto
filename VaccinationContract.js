@@ -1,4 +1,4 @@
-"use strict";
+ "use strict";
 
 var VaccinationContract = function () {
       LocalContractStorage.defineMapProperty(this, "userVaccinesMap");
@@ -17,6 +17,12 @@ VaccinationContract.prototype = {
         //Get Data
         var user = Blockchain.transaction.from;
         return this.userVaccinesMap.get(user);
+    },
+
+/* Have to add this function to blockchain */
+    getVaccinesByAddress: function(addr){
+      var user = addr;
+      return this.userVaccinesMap.get(user);
     }
 };
 
